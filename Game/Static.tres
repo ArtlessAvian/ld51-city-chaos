@@ -1,0 +1,13 @@
+[gd_resource type="Shader" format=3 uid="uid://dekkhlh5i3870"]
+
+[resource]
+code = "shader_type spatial;
+render_mode unshaded;
+
+uniform sampler2D noise;
+
+void fragment() {
+	float sample = texture(noise, SCREEN_UV + vec2(TIME)/5.0).x;
+	ALBEDO = vec3(0.02 + sample * 0.02);
+}
+"

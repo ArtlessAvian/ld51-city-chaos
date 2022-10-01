@@ -36,6 +36,7 @@ func _physics_process(delta):
 	velocity += Vector3.DOWN * delta * gravity_acc
 	move_and_slide()
 	self.position.z = round(self.position.z)
+
 func swap_layer(delta_z: int):
 	self.position.z += delta_z
 	swap_cooldown = swap_period

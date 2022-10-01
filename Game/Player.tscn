@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Game/Player.gd" id="1_ht1kd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_726gy"]
-size = Vector3(1, 0.9, 0.5)
+size = Vector3(0.8, 0.8, 0.8)
 
 [node name="Player" type="CharacterBody3D" groups=["Entity"]]
 collision_layer = 16
@@ -15,7 +15,7 @@ axis_lock_angular_z = true
 script = ExtResource("1_ht1kd")
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0.45, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_726gy")
 
 [node name="ForwardRaycast" type="Node3D" parent="."]
@@ -75,7 +75,8 @@ texture = ExtResource("1_1lghq")
 transform = Transform3D(1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 0, 0)
 
 [node name="Camera3d" type="Camera3D" parent="Visual/SelfieStick"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
+fov = 50.0
 size = 5.0
 
 [node name="Label3d" type="Label3D" parent="."]
