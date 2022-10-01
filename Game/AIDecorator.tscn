@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4wn34qv871t7"]
+
+[ext_resource type="Script" path="res://Game/AI.gd" id="1_mpsuk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_svp03"]
+
+[node name="AIDecorator" type="Node3D"]
+script = ExtResource("1_mpsuk")
+
+[node name="NavigationAgent3d" type="NavigationAgent3D" parent="."]
+
+[node name="Portal" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="Portal"]
+shape = SubResource("BoxShape3D_svp03")
+
+[node name="Label3d" type="Label3D" parent="."]
+text = "hihi"
+font_size = 100

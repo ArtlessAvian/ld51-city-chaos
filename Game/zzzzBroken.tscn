@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfb67h1mab7k"]
+
+[ext_resource type="PackedScene" uid="uid://cs215tuynp2uh" path="res://Game/Player.tscn" id="1_n1msj"]
+[ext_resource type="PackedScene" uid="uid://c4wn34qv871t7" path="res://Game/AIDecorator.tscn" id="2_p36ka"]
+
+[node name="AIPlayer" instance=ExtResource("1_n1msj")]
+
+[node name="AIDecorator" parent="." index="5" instance=ExtResource("2_p36ka")]
