@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs215tuynp2uh"]
+[gd_scene load_steps=4 format=3 uid="uid://bv3tbqew3ad4w"]
 
-[ext_resource type="Texture2D" uid="uid://c2j25fwvd2dba" path="res://icon.svg" id="1_1lghq"]
-[ext_resource type="Script" path="res://Game/Player.gd" id="1_ht1kd"]
+[ext_resource type="Script" path="res://Game/Characters/Player.gd" id="1_xor3i"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="2_4aecf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_726gy"]
 size = Vector3(0.8, 0.8, 0.8)
@@ -12,7 +12,7 @@ axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-script = ExtResource("1_ht1kd")
+script = ExtResource("1_xor3i")
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
@@ -69,7 +69,7 @@ debug_shape_thickness = 5
 [node name="Sprite3d" type="Sprite3D" parent="Visual"]
 offset = Vector2(0, 64)
 pixel_size = 0.0078
-texture = ExtResource("1_1lghq")
+texture = ExtResource("2_4aecf")
 
 [node name="SelfieStick" type="Node3D" parent="Visual"]
 transform = Transform3D(1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 0, 0)

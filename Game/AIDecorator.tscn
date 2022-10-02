@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4wn34qv871t7"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://Game/AI.gd" id="1_mpsuk"]
+[ext_resource type="Script" path="res://Game/AIDeco.gd" id="1_mpsuk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_svp03"]
 

@@ -12,7 +12,7 @@ _global_script_classes=[{
 "base": "CharacterBody3D",
 "class": &"Player",
 "language": &"GDScript",
-"path": "res://Game/Player.gd"
+"path": "res://Game/Characters/Player.gd"
 }, {
 "base": "Node3D",
 "class": &"Zone",
