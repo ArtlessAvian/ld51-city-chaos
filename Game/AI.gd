@@ -25,7 +25,7 @@ func _physics_process(_delta):
 func change_state():
 	match state:
 		AIState.IDLE_RIGHT, AIState.IDLE_LEFT:
-			if state_time > 60:
+			if state_time > 180:
 				state = AIState.IDLE_HANG_AROUND
 				state_time = 0
 		AIState.IDLE_HANG_AROUND:

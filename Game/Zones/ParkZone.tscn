@@ -1,0 +1,108 @@
+[gd_scene load_steps=11 format=3 uid="uid://b1ky2g87x6xsm"]
+
+[ext_resource type="Script" path="res://Game/Zones/Zone.gd" id="1_jlh0x"]
+[ext_resource type="PackedScene" uid="uid://k6iv4onhbsun" path="res://Game/Zones/Portal.tscn" id="2_jhmpt"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_qejmm"]
+vertices = PackedVector3Array(15.1936, 0.3976, 2.099, 15.5936, 0.3976, 0.898999, 15.1936, 0.3976, -2.101, 11.3936, 0.3976, -2.101, 11.3936, 0.3976, 2.099, -15.2064, 0.3976, -2.101, -15.6064, 0.3976, -0.901001, -15.2064, 0.3976, 2.099, -11.4064, 0.3976, 2.099, -11.4064, 0.3976, -2.101, -0.00639915, 0.3976, -2.101, -3.8064, 0.3976, -2.101, -3.8064, 0.3976, 2.099, -0.00639915, 0.3976, 2.099, -0.00639915, 0.3976, 2.099, 3.7936, 0.3976, 2.099, 3.7936, 0.3976, -2.101, -0.00639915, 0.3976, -2.101, 7.5936, 0.3976, 2.099, 11.3936, 0.3976, 2.099, 11.3936, 0.3976, -2.101, 7.5936, 0.3976, -2.101, -7.6064, 0.3976, -2.101, -11.4064, 0.3976, -2.101, -11.4064, 0.3976, 2.099, -7.6064, 0.3976, 2.099, 3.7936, 0.3976, 2.099, 7.5936, 0.3976, 2.099, 7.5936, 0.3976, -2.101, 3.7936, 0.3976, -2.101, -3.8064, 0.3976, -2.101, -7.6064, 0.3976, -2.101, -7.6064, 0.3976, 2.099, -3.8064, 0.3976, 2.099)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 9), PackedInt32Array(7, 9, 8), PackedInt32Array(13, 12, 10), PackedInt32Array(10, 12, 11), PackedInt32Array(17, 16, 14), PackedInt32Array(14, 16, 15), PackedInt32Array(21, 20, 18), PackedInt32Array(18, 20, 19), PackedInt32Array(25, 24, 22), PackedInt32Array(22, 24, 23), PackedInt32Array(29, 28, 26), PackedInt32Array(26, 28, 27), PackedInt32Array(33, 32, 30), PackedInt32Array(30, 32, 31)]
+geometry_source_geometry_mode = 1
+cell_size = 0.2
+cell_height = 0.2
+agent_height = 1.0
+agent_radius = 0.4
+agent_max_climb = 1.0
+edge_max_length = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_urgis"]
+albedo_color = Color(0.8, 0.780392, 0.533333, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rf01o"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vvlkl"]
+noise = SubResource("FastNoiseLite_rf01o")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qx8w1"]
+albedo_color = Color(0.360784, 0.568627, 0.396078, 1)
+metallic_specular = 0.0
+normal_scale = 0.2
+heightmap_texture = SubResource("NoiseTexture2D_vvlkl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbf0w"]
+albedo_color = Color(0.545098, 0.658824, 0.682353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_swxi8"]
+top_radius = 0.1
+radial_segments = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c61a6"]
+transparency = 1
+albedo_color = Color(0.521569, 0.823529, 0.956863, 0.658824)
+
+[node name="Zone" type="NavigationRegion3D"]
+navmesh = SubResource("NavigationMesh_qejmm")
+script = ExtResource("1_jlh0x")
+
+[node name="Portals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.5)
+
+[node name="Left" parent="Portals" instance=ExtResource("2_jhmpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.5, -1.5)
+
+[node name="Right" parent="Portals" instance=ExtResource("2_jhmpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1.5, -1.5)
+
+[node name="CsgSphere3d" type="CSGSphere3D" parent="." groups=["navmesh"]]
+transform = Transform3D(1.0004, 0, 0, 0, 1.0004, 0, 0, 0, 1.0004, 0, 0, 0)
+operation = 1
+use_collision = true
+radius = 16.0
+radial_segments = 16
+rings = 32
+
+[node name="CsgPolygon3d" type="CSGBox3D" parent="CsgSphere3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+operation = 1
+use_collision = true
+size = Vector3(32, 6, 5)
+material = SubResource("StandardMaterial3D_urgis")
+
+[node name="CsgSphere3d2" type="CSGSphere3D" parent="."]
+transform = Transform3D(1.0004, 0, 0, 0, 1.0004, 0, 0, 0, 1.0004, 0, 0, 0)
+operation = 1
+use_collision = true
+radius = 16.0
+radial_segments = 16
+rings = 32
+
+[node name="CsgBox3d" type="CSGBox3D" parent="CsgSphere3d2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
+operation = 1
+use_collision = true
+size = Vector3(32, 6, 32)
+material = SubResource("StandardMaterial3D_qx8w1")
+
+[node name="CsgCylinder3d" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.80989)
+radius = 4.0
+height = 0.5
+material = SubResource("StandardMaterial3D_fbf0w")
+
+[node name="CsgCylinder3d2" type="CSGCylinder3D" parent="CsgCylinder3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.278715, 0)
+operation = 2
+radius = 3.4
+height = 0.5
+
+[node name="Mesh" type="CSGMesh3D" parent="CsgCylinder3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.394189, 0)
+mesh = SubResource("CylinderMesh_swxi8")
+
+[node name="CsgMesh3d" type="CSGPolygon3D" parent="CsgCylinder3d/Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+polygon = PackedVector2Array(0, 0, 0, 1, 0.87221, 1.48175, 1.61951, 0.731371, 2.0684, -1.15115, 3.43617, -1.29256, 1.06863, -1.2573, 0.62964, 0.50985)
+mode = 1
+spin_degrees = 360.0
+spin_sides = 8
+smooth_faces = true
+material = SubResource("StandardMaterial3D_c61a6")

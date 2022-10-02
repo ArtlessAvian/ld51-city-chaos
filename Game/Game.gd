@@ -19,7 +19,8 @@ func setup():
 		var zone : Node3D = get_node("Zones").get_child(i)
 		zone.position = Vector3.FORWARD.rotated(Vector3.UP, 2 * PI/ZONES * i) * -spacing
 		var rounded_rotate = PI/2 * round(4.0 / ZONES * i)
-		zone.rotation = Vector3.UP * rounded_rotate
+		#zone.rotation = Vector3.UP * rounded_rotate
+		zone.rotation = Vector3.UP * 2 * PI/ZONES * i
 
 	for i in range(ZONES):
 		var right = get_node("Zones").get_child(i).get_node("Portals/Right")

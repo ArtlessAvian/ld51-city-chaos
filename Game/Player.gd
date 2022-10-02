@@ -6,6 +6,9 @@ var swap_cooldown = 0
 var tp_cooldown = 0
 const swap_period = 0.1
 
+var top_speed = 10
+var x_acc = 50
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -25,8 +28,6 @@ func _physics_process(delta):
 			self.velocity.y += 10
 	
 	var input_x = Input.get_axis(controller + "_left", controller + "_right")
-	var top_speed = 10
-	var x_acc = 50
 #	if input_x == 0 or sign(input_x * get_local_vel_x()) < -0.01:
 #		set_local_vel_x(move_toward(get_local_vel_x(), 0, delta * 60))
 #	else:
@@ -35,7 +36,7 @@ func _physics_process(delta):
 	var gravity_acc = 20 if Input.is_action_pressed(controller + "_select") else 40
 	velocity += Vector3.DOWN * delta * gravity_acc
 	move_and_slide()
-	self.position.z = round(self.position.z)
+	self.position.z = clamp(round(self.position.z), -2, 2)
 
 func swap_layer(delta_z: int):
 	self.position.z += delta_z
@@ -45,11 +46,12 @@ func swap_layer(delta_z: int):
 
 func _process(delta: float):
 	$Visual.position.z = move_toward($Visual.position.z, 0, delta * 1.0/swap_period)
+	$Visual.position.y = pow(sin($Visual.position.z * PI), 2) * 0.1 
 
 	$Label3d.text = str(is_on_floor())
 
 func can_move_forward():
-	if self.position.z <= 0.5:
+	if self.position.z <= -1.5:
 		return false
 	for cast in $ForwardRaycast.get_children():
 		if cast.is_colliding():
@@ -57,7 +59,7 @@ func can_move_forward():
 	return swap_cooldown <= 0 
 
 func can_move_backward():
-	if self.position.z >= 2.5:
+	if self.position.z >= 1.5:
 		return false
 	for cast in $BackwardRaycast.get_children():
 		if cast.is_colliding():
