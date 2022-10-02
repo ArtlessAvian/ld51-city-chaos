@@ -20,14 +20,32 @@ func post_init(go_left, strong, owner):
 		$Area3d.collision_mask |= (1 << 13)
 	
 	self.ownerr = owner
-
+	
+	$Visual/Sprite3d.flip_h = go_left
+	
+	if strong:
+		$big.play()
+	else:
+		$small.play()
+		
 func _physics_process(delta):
 	life -= delta
 	move_and_slide()
 	
-	if life < 0 or is_on_wall() or abs(position.x) >= 15:
+	if life < 0 or is_on_wall() or velocity.x == 0:
 		queue_free()
-	
+
+func _on_area_3d_body_entered(body):
+	if is_queued_for_deletion():
+		return
+	if body != ownerr and body.has_method("take_damage") and not body in pierced:
+		body.take_damage()
+		body.position.x += -0.1 if go_left else 0.1
+		pierced[body] = 0
+		if not infinite_pierce: # and len(pierced) >= pierce:
+			queue_free()
+
+
 func get_local_right():
 	return Vector3.RIGHT.rotated(Vector3.UP, global_rotation.y)
 
@@ -42,12 +60,3 @@ func get_local_vel_x():
 func set_local_vel_x(signed_mag):
 	velocity += get_local_right() * signed_mag - get_local_vel_x_vec()
 
-func _on_area_3d_body_entered(body):
-	if is_queued_for_deletion():
-		return
-	if body != ownerr and body.has_method("take_damage") and not body in pierced:
-		body.take_damage()
-		body.position.x += -0.1 if go_left else 0.1
-		pierced[body] = 0
-		if not infinite_pierce: # and len(pierced) >= pierce:
-			queue_free()

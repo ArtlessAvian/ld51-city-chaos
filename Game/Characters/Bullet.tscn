@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6dcledqm53"]
+[gd_scene load_steps=7 format=3 uid="uid://b6dcledqm53"]
 
 [ext_resource type="Script" path="res://Game/Characters/Bullet.gd" id="1_h8ux5"]
-[ext_resource type="Texture2D" uid="uid://c2j25fwvd2dba" path="res://icon.svg" id="2_4aecf"]
+[ext_resource type="Texture2D" uid="uid://b4gyquiw611it" path="res://Game/projectile.png" id="2_j3qba"]
+[ext_resource type="AudioStream" uid="uid://d3nfcvfmdic05" path="res://laserShoot.wav" id="3_hh21i"]
+[ext_resource type="AudioStream" uid="uid://c50t2tctoqpc1" path="res://explosion(2).wav" id="4_80eyo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_726gy"]
 size = Vector3(0.2, 0.2, 0.2)
@@ -24,7 +26,7 @@ shape = SubResource("BoxShape3D_726gy")
 
 [node name="Sprite3d" type="Sprite3D" parent="Visual"]
 pixel_size = 0.004
-texture = ExtResource("2_4aecf")
+texture = ExtResource("2_j3qba")
 
 [node name="Area3d" type="Area3D" parent="."]
 collision_layer = 0
@@ -35,7 +37,18 @@ shape = SubResource("BoxShape3D_2u14k")
 
 [node name="Label3d" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+visible = false
 text = "hello"
 font_size = 64
+
+[node name="small" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_hh21i")
+unit_db = -15.0
+max_db = -5.0
+
+[node name="big" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_80eyo")
+unit_db = -15.0
+max_db = -5.0
 
 [connection signal="body_entered" from="Area3d" to="." method="_on_area_3d_body_entered"]

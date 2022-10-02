@@ -1,4 +1,3 @@
-@tool
 extends Node3D
 
 @export var dirty = false
@@ -56,7 +55,7 @@ func add_box():
 	var instance = box_scene.instantiate()
 	zone.add_child(instance)
 	instance.position = Vector3.UP * 10
-	instance.position.x += (randf() * 2 - 1) * 15
+	instance.position.x += (randf() * 2 - 1) * 10
 	instance.position.z += (randi() % 4 - 2) + (randf() * 2 - 1) * 0.1
 	instance.rotation = Vector3.ZERO
 
@@ -75,6 +74,7 @@ func add_mooks():
 func end_game():
 	%Notif.push_message("[color=#faa]The end is near.[/color]")
 
+var boss
 func end_game_again():
 	%Notif.push_message("This is the end.")
 	var player = find_child("Player", true, false)
@@ -88,18 +88,22 @@ func end_game_again():
 				#queue_free()
 	
 	# add mr dps check
-	var instance = boss_scene.instantiate()
-	zone.add_child(instance)
+	boss = boss_scene.instantiate()
+	zone.add_child(boss)
 	# some good shots with the big bullet
-	instance.randommm = 0
-	instance.position = Vector3.UP * 10
-	instance.rotation = Vector3.ZERO
+	boss.randommm = 0
+	boss.position = Vector3.UP * 2
+	boss.rotation = Vector3.ZERO
 
 func end_game_for_real():
 	var tween = create_tween()
 	# wondering if this takes infinitely long
 	# tween.tween_property(Engine, "time_scale", 0, 1)
 	tween.tween_property(Engine, "time_scale", 0.1, 1)
+	
+	if boss != null:
+		%YouWin.text = "you lose :c"
+	%YouWin.show()
 
 func setup():
 	var zones = get_node("Zones").get_child_count()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://u80k638q8lq8"]
+[gd_scene load_steps=22 format=3 uid="uid://u80k638q8lq8"]
 
 [ext_resource type="Script" path="res://Game/Game.gd" id="1_8p7sq"]
 [ext_resource type="PackedScene" uid="uid://brct5f48014c6" path="res://Game/Zones/OverpassZone.tscn" id="1_edscu"]
@@ -46,6 +46,9 @@ font = SubResource("FontVariation_o28bm")
 font_size = 32
 outline_size = 26
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hntlm"]
+font_size = 100
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_8p7sq")
@@ -107,7 +110,7 @@ offset_bottom = 32.0
 size_flags_horizontal = 3
 max_value = 10.0
 step = 0.0
-value = 9.93833
+value = 8.44
 nine_patch_stretch = true
 texture_under = ExtResource("10_261cu")
 texture_progress = ExtResource("11_kqqba")
@@ -126,7 +129,7 @@ offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
-text = "9"
+text = "8"
 label_settings = SubResource("LabelSettings_aq4q6")
 horizontal_alignment = 2
 
@@ -138,7 +141,7 @@ offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
-text = ".993"
+text = ".843"
 label_settings = SubResource("LabelSettings_aq4q6")
 horizontal_alignment = 1
 
@@ -154,3 +157,22 @@ size_flags_vertical = 8
 bbcode_enabled = true
 text = "[font_size=32][color=afa]Arrow keys to move. Space to jump. ZXC to shoot! Hit the boxes![/color]"
 script = ExtResource("10_w8jpf")
+
+[node name="YouWin" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -353.5
+offset_top = -70.0
+offset_right = 353.5
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0872665
+size_flags_horizontal = 4
+text = "YOU WIN :DDD"
+label_settings = SubResource("LabelSettings_hntlm")

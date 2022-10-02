@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7xtgmqnowbdp"
-path.s3tc="res://.godot/imported/Charge.png-a663078a5aa2e9b78a2d23d47924290c.s3tc.ctex"
-path.etc2="res://.godot/imported/Charge.png-a663078a5aa2e9b78a2d23d47924290c.etc2.ctex"
+uid="uid://b4gyquiw611it"
+path.s3tc="res://.godot/imported/projectile.png-fd5c9d16f4d81f45a29310f01a53c9c9.s3tc.ctex"
+path.etc2="res://.godot/imported/projectile.png-fd5c9d16f4d81f45a29310f01a53c9c9.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Game/PowerupType/Charge.png"
-dest_files=["res://.godot/imported/Charge.png-a663078a5aa2e9b78a2d23d47924290c.s3tc.ctex", "res://.godot/imported/Charge.png-a663078a5aa2e9b78a2d23d47924290c.etc2.ctex"]
+source_file="res://Game/projectile.png"
+dest_files=["res://.godot/imported/projectile.png-fd5c9d16f4d81f45a29310f01a53c9c9.s3tc.ctex", "res://.godot/imported/projectile.png-fd5c9d16f4d81f45a29310f01a53c9c9.etc2.ctex"]
 
 [params]
 

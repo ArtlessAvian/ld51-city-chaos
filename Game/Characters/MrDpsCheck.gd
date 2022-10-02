@@ -7,7 +7,7 @@ const powerup_scene = preload("res://Game/Characters/Powerup.tscn")
 var swap_cooldown = 0
 const swap_period = 0.1
 var facing_left = false
-var health = 20 # 20 / 10, 2 charged shots a second
+var health = 15 # 10/20, 0.5 seconds per shot, ~20 powerups minimum.
 var random_walk = 0
 
 var randommm
@@ -48,6 +48,7 @@ func chase_player(delta, player, match_z = false):
 
 func take_damage():
 	health -= 1
+	print(health)
 	
 	if health <= 0:
 		if randf() < 0.3:
@@ -58,7 +59,7 @@ func take_damage():
 		return
 	
 	var tween = create_tween()
-	tween.tween_property($Visual/Sprite3d, "modulate", Color.WHITE, 0.1).from(Color.RED)
+	tween.tween_property($Visual/Sprite3d, "modulate", Color.WHITE, 10/15.0).from(Color.RED)
 
 func _process(delta: float):
 	$Visual.position.z = move_toward($Visual.position.z, 0, delta * 1.0/swap_period)

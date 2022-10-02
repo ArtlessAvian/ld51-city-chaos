@@ -7,7 +7,7 @@ const powerup_scene = preload("res://Game/Characters/Powerup.tscn")
 var swap_cooldown = 0
 const swap_period = 0.1
 var facing_left = false
-var health = 20
+var health = 25
 var random_walk = 0
 
 var randommm
@@ -104,11 +104,11 @@ func swap_layer(delta_z: int):
 func take_damage():
 	health -= 1
 	
+	if health == 0 and randf() < 0.3:
+		var powerup = powerup_scene.instantiate()
+		add_sibling(powerup)
+		powerup.global_transform = global_transform
 	if health <= 0:
-		if randf() < 0.3:
-			var powerup = powerup_scene.instantiate()
-			add_sibling(powerup)
-			powerup.global_transform = global_transform
 		queue_free()
 		return
 	
