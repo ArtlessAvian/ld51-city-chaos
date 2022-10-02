@@ -1,14 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://k6iv4onhbsun"]
+[gd_scene load_steps=7 format=3 uid="uid://k6iv4onhbsun"]
 
 [ext_resource type="Script" path="res://Game/Zones/Portal.gd" id="1_551dg"]
+[ext_resource type="Shader" path="res://Game/Zones/Portal.gdshader" id="2_0sfk6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n0xnm"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ip2rq"]
+render_priority = 0
+shader = ExtResource("2_0sfk6")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kgbx7"]
+material = SubResource("ShaderMaterial_ip2rq")
+flip_faces = true
+top_radius = 0.8
+bottom_radius = 0.7
+height = 1.0
+rings = 1
+cap_top = false
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_preuu"]
 size = Vector3(2, 10, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_c0nsq"]
-size = Vector3(2, 2, 1)
 
 [node name="Left" type="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
@@ -19,19 +30,22 @@ script = ExtResource("1_551dg")
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_n0xnm")
 
+[node name="MeshInstance3d" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh = SubResource("CylinderMesh_kgbx7")
+skeleton = NodePath("../StaticBody3d")
+
 [node name="StaticBody3d" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="StaticBody3d"]
 shape = SubResource("BoxShape3D_preuu")
 
-[node name="MeshInstance3d" type="MeshInstance3D" parent="StaticBody3d"]
-mesh = SubResource("BoxMesh_c0nsq")
-
 [node name="Link" type="NavigationLink3D" parent="."]
 travel_cost = 0.0
 
 [node name="Label3d" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0145, 0)
+visible = false
 text = "heyheyhey"
 font_size = 74

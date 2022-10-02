@@ -7,11 +7,12 @@ var target_pos = null
 
 func _ready():
 	var action_prefix = get_parent().controller
-	InputMap.add_action(action_prefix + "_up")
-	InputMap.add_action(action_prefix + "_down")
-	InputMap.add_action(action_prefix + "_left")
-	InputMap.add_action(action_prefix + "_right")
-	InputMap.add_action(action_prefix + "_select")
+	if (not InputMap.has_action(action_prefix + "up")):
+		InputMap.add_action(action_prefix + "_up")
+		InputMap.add_action(action_prefix + "_down")
+		InputMap.add_action(action_prefix + "_left")
+		InputMap.add_action(action_prefix + "_right")
+		InputMap.add_action(action_prefix + "_select")
 	
 	state = AIState.IDLE_RIGHT if randf() < 0.5 else AIState.IDLE_LEFT
 
@@ -28,7 +29,7 @@ func change_state():
 				state = AIState.IDLE_HANG_AROUND
 				state_time = 0
 		AIState.IDLE_HANG_AROUND:
-			if state_time > 0:
+			if state_time > 5:
 				state = AIState.IDLE_RIGHT if randf() < 0.5 else AIState.IDLE_LEFT
 				state_time = 0
 				
@@ -54,7 +55,7 @@ func press_actions():
 	var local_next = global_next * get_parent().global_transform
 
 	$Label3d.global_position = global_next
-	$Label3d.text = str(local_next)
+	$Label3d.text = str(local_next.round())
 
 	if local_next.x > 0.5:
 		Input.action_press(action_prefix + "_right")
