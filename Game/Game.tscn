@@ -1,14 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://u80k638q8lq8"]
+[gd_scene load_steps=21 format=3 uid="uid://u80k638q8lq8"]
 
 [ext_resource type="Script" path="res://Game/Game.gd" id="1_8p7sq"]
 [ext_resource type="PackedScene" uid="uid://brct5f48014c6" path="res://Game/Zones/OverpassZone.tscn" id="1_edscu"]
 [ext_resource type="PackedScene" uid="uid://b1ky2g87x6xsm" path="res://Game/Zones/ParkZone.tscn" id="2_5tvbr"]
 [ext_resource type="PackedScene" uid="uid://dfl5wqg318xt3" path="res://Game/Characters/Player.tscn" id="2_rersq"]
-[ext_resource type="PackedScene" uid="uid://8tmwb6ncwqct" path="res://Game/AIDecorator.tscn" id="4_sq11n"]
 [ext_resource type="Shader" path="res://Game/Shaderrrs/Sky.gdshader" id="5_hyayv"]
 [ext_resource type="PackedScene" uid="uid://d2ep1qcxuepfb" path="res://Game/Zones/BeachZone.tscn" id="5_m8knn"]
 [ext_resource type="Shader" uid="uid://b4kyhh7hgfnly" path="res://Game/Shaderrrs/Static.tres" id="5_mg6f1"]
+[ext_resource type="PackedScene" uid="uid://dj0eikop8pv3h" path="res://Game/Characters/Box.tscn" id="5_mun6u"]
 [ext_resource type="PackedScene" uid="uid://dwfo7uy0vedak" path="res://Game/Characters/Powerup.tscn" id="7_8j8tv"]
+[ext_resource type="Texture2D" uid="uid://h6pfyrw2rt0g" path="res://Game/progress2.png" id="10_261cu"]
+[ext_resource type="Script" path="res://Game/Notif.gd" id="10_w8jpf"]
+[ext_resource type="Texture2D" uid="uid://chrsnd64xwe8h" path="res://Game/progress.png" id="11_kqqba"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cwbbs"]
 render_priority = 0
@@ -36,44 +39,118 @@ flip_faces = true
 radial_segments = 128
 rings = 64
 
+[sub_resource type="FontVariation" id="FontVariation_o28bm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_aq4q6"]
+font = SubResource("FontVariation_o28bm")
+font_size = 32
+outline_size = 26
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Game" type="Node3D"]
 script = ExtResource("1_8p7sq")
-spacing = 35.0
+spacing = 20.0
 
 [node name="Zones" type="Node3D" parent="."]
 
 [node name="Park" parent="Zones" instance=ExtResource("2_5tvbr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
 
 [node name="Player" parent="Zones/Park" instance=ExtResource("2_rersq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-axis_lock_linear_z = false
-
-[node name="Player2" parent="Zones/Park" instance=ExtResource("2_rersq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-axis_lock_linear_z = false
-controller = "ai"
-
-[node name="AIDecorator" parent="Zones/Park/Player2" instance=ExtResource("4_sq11n")]
 
 [node name="Powerup" parent="Zones/Park" instance=ExtResource("7_8j8tv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.62981, 0.891032, -0.0893021)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63, 0.891, 1)
+
+[node name="Box" parent="Zones/Park" instance=ExtResource("5_mun6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 30, 0)
+
+[node name="Box2" parent="Zones/Park" instance=ExtResource("5_mun6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 35, 0)
+
+[node name="Box3" parent="Zones/Park" instance=ExtResource("5_mun6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 40, 0)
 
 [node name="Overpass" parent="Zones" instance=ExtResource("1_edscu")]
-transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 30.3109, 0, -17.5)
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 17.3205, 0, -10)
 
-[node name="BeachZone" parent="Zones" instance=ExtResource("5_m8knn")]
-transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, -30.3109, 0, -17.5)
+[node name="Beach" parent="Zones" instance=ExtResource("5_m8knn")]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, -17.3205, 0, -10)
 
 [node name="Visual" type="Node3D" parent="."]
 
 [node name="DirectionalLight3d" type="DirectionalLight3D" parent="Visual"]
-transform = Transform3D(0.869431, -0.138857, 0.47414, -0.316331, 0.580725, 0.750129, -0.379505, -0.80217, 0.460976, 0, 93.5615, 0)
+transform = Transform3D(0.869431, -0.138857, 0.47414, -0.316331, 0.580725, 0.750129, -0.379505, -0.80217, 0.460976, 0, 23.076, 0)
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="Visual"]
-transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+transform = Transform3D(70, 0, 0, 0, 70, 0, 0, 0, 70, 0, 0, 0)
 mesh = SubResource("SphereMesh_1hmi4")
 
 [node name="MeshInstance3d2" type="MeshInstance3D" parent="Visual"]
 transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 300, 0, 0, 0)
 mesh = SubResource("SphereMesh_ul4sn")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 48.0
+grow_horizontal = 2
+
+[node name="Progrses" type="TextureProgressBar" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2i(0, 32)
+offset_right = 1132.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+max_value = 10.0
+step = 0.0
+value = 4.56667
+nine_patch_stretch = true
+texture_under = ExtResource("10_261cu")
+texture_progress = ExtResource("11_kqqba")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2i(100, 0)
+offset_top = 36.0
+offset_right = 1132.0
+offset_bottom = 84.0
+
+[node name="Secs" type="Label" parent="HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2i(36, 0)
+offset_right = 36.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+text = "4"
+label_settings = SubResource("LabelSettings_aq4q6")
+horizontal_alignment = 2
+
+[node name="Millisecs" type="Label" parent="HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+offset_left = 40.0
+offset_right = 103.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+text = ".456"
+label_settings = SubResource("LabelSettings_aq4q6")
+horizontal_alignment = 1
+
+[node name="Notif" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+offset_left = 10.0
+offset_top = 590.0
+offset_right = 1142.0
+offset_bottom = 638.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+bbcode_enabled = true
+text = "[font_size=32][color=afa]Arrow keys to move. Space to jump. ZXC to shoot! Hit the boxes![/color]"
+script = ExtResource("10_w8jpf")

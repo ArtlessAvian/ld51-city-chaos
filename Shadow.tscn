@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3kkvxuchiw3k"]
+
+[ext_resource type="Script" path="res://Game/Characters/RayToGround.gd" id="1_aonvb"]
+[ext_resource type="Texture2D" uid="uid://cdlnddo8lmmno" path="res://Game/shadow.png" id="2_mda5b"]
+
+[node name="RayCast3d" type="RayCast3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, -10, 0)
+script = ExtResource("1_aonvb")
+
+[node name="Node3d" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Sprite3d2" type="Sprite3D" parent="Node3d"]
+pixel_size = 0.0078
+axis = 1
+texture = ExtResource("2_mda5b")

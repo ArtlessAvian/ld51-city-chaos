@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://guqdh7nac1yb"]
+
+[ext_resource type="Script" path="res://Game/PowerupType/PowerupType.gd" id="1_og560"]
+[ext_resource type="Texture2D" uid="uid://dbww5adnrcky0" path="res://Game/PowerupType/TopSpeed.png" id="2_pko1u"]
+
+[resource]
+script = ExtResource("1_og560")
+property = "top_speed"
+delta = 0.5
+display_name = "Top Speed"
+texture = ExtResource("2_pko1u")

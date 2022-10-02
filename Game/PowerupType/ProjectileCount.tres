@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c6u4bq0i60aqd"]
+
+[ext_resource type="Script" path="res://Game/PowerupType/PowerupType.gd" id="1_og560"]
+[ext_resource type="Texture2D" uid="uid://33tnmanamd1n" path="res://Game/PowerupType/BulletCount.png" id="2_baosc"]
+
+[resource]
+script = ExtResource("1_og560")
+property = "projectile_count"
+delta = 2.0
+display_name = "Bullet Count"
+texture = ExtResource("2_baosc")

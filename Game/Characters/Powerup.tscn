@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwfo7uy0vedak"]
+[gd_scene load_steps=5 format=3 uid="uid://dwfo7uy0vedak"]
 
 [ext_resource type="Script" path="res://Game/Characters/Powerup.gd" id="1_njhma"]
 [ext_resource type="Texture2D" uid="uid://c2j25fwvd2dba" path="res://icon.svg" id="2_4aecf"]
+[ext_resource type="PackedScene" uid="uid://b3kkvxuchiw3k" path="res://Shadow.tscn" id="3_ar5se"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_726gy"]
 size = Vector3(0.8, 0.8, 0.8)
@@ -29,10 +30,11 @@ shape = SubResource("BoxShape3D_726gy")
 
 [node name="Sprite3d" type="Sprite3D" parent="Visual"]
 offset = Vector2(0, 64)
-modulate = Color(0, 1, 0, 1)
 pixel_size = 0.0078
 billboard = 1
 texture = ExtResource("2_4aecf")
+
+[node name="RayCast3d" parent="Visual/Sprite3d" instance=ExtResource("3_ar5se")]
 
 [node name="Label3d" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13678, 0.241758)

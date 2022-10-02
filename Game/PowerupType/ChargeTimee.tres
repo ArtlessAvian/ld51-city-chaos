@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://xxj6265c22cr"]
+
+[ext_resource type="Script" path="res://Game/PowerupType/PowerupType.gd" id="1_flhif"]
+[ext_resource type="Texture2D" uid="uid://7xtgmqnowbdp" path="res://Game/PowerupType/Charge.png" id="2_75s0v"]
+
+[resource]
+script = ExtResource("1_flhif")
+property = "charge_time"
+delta = -0.02
+display_name = "Charge Time"
+texture = ExtResource("2_75s0v")

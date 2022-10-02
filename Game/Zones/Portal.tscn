@@ -11,12 +11,12 @@ shader = ExtResource("2_0sfk6")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_kgbx7"]
 material = SubResource("ShaderMaterial_ip2rq")
-flip_faces = true
 top_radius = 0.8
 bottom_radius = 0.7
 height = 1.0
 rings = 1
 cap_top = false
+cap_bottom = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_preuu"]
 size = Vector3(2, 10, 1)

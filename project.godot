@@ -10,6 +10,21 @@ config_version=5
 
 _global_script_classes=[{
 "base": "CharacterBody3D",
+"class": &"Box",
+"language": &"GDScript",
+"path": "res://Game/Characters/Box.gd"
+}, {
+"base": "CharacterBody3D",
+"class": &"Bullet",
+"language": &"GDScript",
+"path": "res://Game/Characters/Bullet.gd"
+}, {
+"base": "CharacterBody3D",
+"class": &"Enemy",
+"language": &"GDScript",
+"path": "res://Game/Characters/Enemy.gd"
+}, {
+"base": "CharacterBody3D",
 "class": &"Player",
 "language": &"GDScript",
 "path": "res://Game/Characters/Player.gd"
@@ -19,14 +34,23 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://Game/Characters/Powerup.gd"
 }, {
+"base": "Resource",
+"class": &"PowerupType",
+"language": &"GDScript",
+"path": "res://Game/PowerupType/PowerupType.gd"
+}, {
 "base": "Node3D",
 "class": &"Zone",
 "language": &"GDScript",
 "path": "res://Game/Zones/Zone.gd"
 }]
 _global_script_class_icons={
+"Box": "",
+"Bullet": "",
+"Enemy": "",
 "Player": "",
 "Powerup": "",
+"PowerupType": "",
 "Zone": ""
 }
 
@@ -39,23 +63,43 @@ config/icon="res://icon.svg"
 
 [input]
 
-ai_left={
+kb_left={
 "deadzone": 0.5,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194319,"unicode":0,"echo":false,"script":null)
+]
 }
-ai_right={
+kb_right={
 "deadzone": 0.5,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194321,"unicode":0,"echo":false,"script":null)
+]
 }
-ai_up={
+kb_in={
 "deadzone": 0.5,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194320,"unicode":0,"echo":false,"script":null)
+]
 }
-ai_down={
+kb_out={
 "deadzone": 0.5,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194322,"unicode":0,"echo":false,"script":null)
+]
 }
-ai_select={
+kb_jump={
 "deadzone": 0.5,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"unicode":0,"echo":false,"script":null)
+]
+}
+kb_shoot={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":90,"unicode":0,"echo":false,"script":null)
+]
+}
+kb_shoot2={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":88,"unicode":0,"echo":false,"script":null)
+]
+}
+kb_shoot3={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":67,"unicode":0,"echo":false,"script":null)
+]
 }

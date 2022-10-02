@@ -42,13 +42,12 @@ navmesh = SubResource("NavigationMesh_w1bxe")
 script = ExtResource("1_jlh0x")
 
 [node name="Portals" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.5)
 
 [node name="Left" parent="Portals" instance=ExtResource("2_jhmpt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 1.5, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 0.5, -2)
 
 [node name="Right" parent="Portals" instance=ExtResource("2_jhmpt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 1.5, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0.5, -2)
 
 [node name="CsgSphere3d" type="CSGSphere3D" parent="." groups=["navmesh"]]
 transform = Transform3D(1.0004, 0, 0, 0, 1.0004, 0, 0, 0, 1.0004, 0, 0, 0)

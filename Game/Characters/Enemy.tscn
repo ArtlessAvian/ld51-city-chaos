@@ -1,22 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfl5wqg318xt3"]
+[gd_scene load_steps=5 format=3 uid="uid://d0ctw8crlagm3"]
 
-[ext_resource type="Script" path="res://Game/Characters/Player.gd" id="1_xor3i"]
-[ext_resource type="Texture2D" uid="uid://cdr62wvf8ilc0" path="res://Game/clueless.png" id="2_ngxd0"]
-[ext_resource type="Script" path="res://Game/Characters/SelfieStick.gd" id="3_8vihe"]
-[ext_resource type="Script" path="res://Game/Zones/Popup.gd" id="3_y34r1"]
-[ext_resource type="PackedScene" uid="uid://b3kkvxuchiw3k" path="res://Shadow.tscn" id="4_df8fj"]
-[ext_resource type="Texture2D" uid="uid://h6pfyrw2rt0g" path="res://Game/progress2.png" id="5_dptww"]
-[ext_resource type="Texture2D" uid="uid://chrsnd64xwe8h" path="res://Game/progress.png" id="6_p7gh7"]
+[ext_resource type="Script" path="res://Game/Characters/Enemy.gd" id="1_f81ff"]
+[ext_resource type="Texture2D" uid="uid://bif4mrx81pnne" path="res://Game/enemy_i_guess.png" id="2_y10ie"]
+[ext_resource type="PackedScene" uid="uid://b3kkvxuchiw3k" path="res://Shadow.tscn" id="3_uqu11"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_726gy"]
 size = Vector3(0.8, 0.8, 0.8)
 
-[node name="Player" type="CharacterBody3D" groups=["Entity"]]
-collision_layer = 16
+[node name="Enemy" type="CharacterBody3D" groups=["Entity"]]
+collision_layer = 128
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-script = ExtResource("1_xor3i")
+script = ExtResource("1_f81ff")
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
@@ -73,34 +69,6 @@ debug_shape_thickness = 5
 [node name="Sprite3d" type="Sprite3D" parent="Visual"]
 offset = Vector2(0, 96)
 pixel_size = 0.0078
-texture = ExtResource("2_ngxd0")
+texture = ExtResource("2_y10ie")
 
-[node name="Progress" type="Sprite3D" parent="Visual/Sprite3d"]
-unique_name_in_owner = true
-transform = Transform3D(60, 0, 0, 0, 10, 0, 0, 0, 10, 0, 1.355, -0.5)
-texture = ExtResource("5_dptww")
-
-[node name="Bar" type="Sprite3D" parent="Visual/Sprite3d/Progress"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
-texture = ExtResource("6_p7gh7")
-
-[node name="Popups" type="Label3D" parent="Visual/Sprite3d"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-visible = false
-render_priority = 2
-outline_render_priority = 1
-text = "POWER UP"
-font_size = 100
-outline_size = 50
-script = ExtResource("3_y34r1")
-
-[node name="RayCast3d" parent="Visual/Sprite3d" instance=ExtResource("4_df8fj")]
-
-[node name="SelfieStick" type="Node3D" parent="Visual"]
-transform = Transform3D(1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 0, 0)
-script = ExtResource("3_8vihe")
-
-[node name="Camera3d" type="Camera3D" parent="Visual/SelfieStick"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
-fov = 50.0
-size = 5.0
+[node name="RayCast3d" parent="Visual/Sprite3d" instance=ExtResource("3_uqu11")]
