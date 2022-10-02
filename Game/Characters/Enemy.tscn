@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0ctw8crlagm3"]
+[gd_scene load_steps=6 format=3 uid="uid://d0ctw8crlagm3"]
 
 [ext_resource type="Script" path="res://Game/Characters/Enemy.gd" id="1_f81ff"]
 [ext_resource type="Texture2D" uid="uid://bif4mrx81pnne" path="res://Game/enemy_i_guess.png" id="2_y10ie"]
 [ext_resource type="PackedScene" uid="uid://b3kkvxuchiw3k" path="res://Shadow.tscn" id="3_uqu11"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_726gy"]
-size = Vector3(0.8, 0.8, 0.8)
+[sub_resource type="BoxShape3D" id="BoxShape3D_sgyt2"]
+size = Vector3(0.8, 1.2, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5najl"]
 
 [node name="Enemy" type="CharacterBody3D" groups=["Entity"]]
 collision_layer = 128
@@ -15,8 +17,8 @@ axis_lock_angular_z = true
 script = ExtResource("1_f81ff")
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
-shape = SubResource("BoxShape3D_726gy")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("BoxShape3D_sgyt2")
 
 [node name="ForwardRaycast" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
@@ -72,3 +74,13 @@ pixel_size = 0.0078
 texture = ExtResource("2_y10ie")
 
 [node name="RayCast3d" parent="Visual/Sprite3d" instance=ExtResource("3_uqu11")]
+
+[node name="Area3d" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3d2" type="CollisionShape3D" parent="Area3d"]
+shape = SubResource("BoxShape3D_5najl")
+
+[connection signal="body_entered" from="Area3d" to="." method="_on_area_3d_body_entered"]

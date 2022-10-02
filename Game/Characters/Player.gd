@@ -62,8 +62,20 @@ func _physics_process(delta):
 			wave_theta += 0.4
 			projectiles.append(bullet)
 			bullet.post_init(facing_left, big_bullet_cooldown <= 0, self)
+			# if projectile_count >= 60:
+				# can't shoot more, so shoot more damage.
+			#	bullet.pierce = floor(projectile_count / 60)
+			#	var fpart = projectile_count/60 - floor(projectile_count / 60)
+			#	if fpart < randf():
+			#		bullet.pierce += 1
+			#	print(bullet.pierce)
 			big_bullet_cooldown = charge_time
 			
+func take_damage():
+	velocity.y = 15
+	var tween = create_tween()
+	tween.tween_property($Visual/Sprite3d, "modulate", Color.WHITE, 0.1).from(Color.RED)
+	
 
 # for plinking
 func any_shoot():

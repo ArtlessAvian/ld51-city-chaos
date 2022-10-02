@@ -6,6 +6,7 @@ extends Node3D
 
 const box_scene = preload("res://Game/Characters/Box.tscn")
 const enemy_scene = preload("res://Game/Characters/Enemy.tscn")
+const boss_scene = preload("res://Game/Characters/MrDpsCheck.tscn")
 
 var zone_colors = {
 	"Park" : "[color=#474]Park[/color]",
@@ -36,11 +37,11 @@ func _physics_process(delta):
 	if event_timer <= 0:
 		event_timer += 10
 		event_count += 1
-		if event_count < 18:
+		if event_count < 12:
 			events[randi() % len(events)].call()
-		elif event_count == 18:
+		elif event_count == 12:
 			end_game()
-		elif event_count == 19:
+		elif event_count == 13:
 			end_game_again()
 		else:
 			end_game_for_real()
@@ -56,14 +57,14 @@ func add_box():
 	zone.add_child(instance)
 	instance.position = Vector3.UP * 10
 	instance.position.x += (randf() * 2 - 1) * 15
-	instance.position.z += (randf() * 4 - 2)
+	instance.position.z += (randi() % 4 - 2) + (randf() * 2 - 1) * 0.1
 	instance.rotation = Vector3.ZERO
 
 func add_mooks():
 	var zone = $Zones.get_child(randi() % $Zones.get_child_count())
 	%Notif.push_message("Enemies spotted at the " + zone_colors[zone.name] + "!")
 
-	for _i in range(event_count + 5):
+	for _i in range(event_count/2 + 6):
 		var instance = enemy_scene.instantiate()
 		zone.add_child(instance)
 		instance.position = Vector3.UP * 10
@@ -76,9 +77,29 @@ func end_game():
 
 func end_game_again():
 	%Notif.push_message("This is the end.")
+	var player = find_child("Player", true, false)
+	var zone = player.get_parent()
+	zone.remove_child(zone.get_node("Portals"))
+	
+	for other in $Zones.get_children():
+		for child in other.get_children():
+			if child is Box:
+				print(child)
+				#queue_free()
+	
+	# add mr dps check
+	var instance = boss_scene.instantiate()
+	zone.add_child(instance)
+	# some good shots with the big bullet
+	instance.randommm = 0
+	instance.position = Vector3.UP * 10
+	instance.rotation = Vector3.ZERO
 
 func end_game_for_real():
-	pass
+	var tween = create_tween()
+	# wondering if this takes infinitely long
+	# tween.tween_property(Engine, "time_scale", 0, 1)
+	tween.tween_property(Engine, "time_scale", 0.1, 1)
 
 func setup():
 	var zones = get_node("Zones").get_child_count()

@@ -107,7 +107,7 @@ offset_bottom = 32.0
 size_flags_horizontal = 3
 max_value = 10.0
 step = 0.0
-value = 4.56667
+value = 9.93833
 nine_patch_stretch = true
 texture_under = ExtResource("10_261cu")
 texture_progress = ExtResource("11_kqqba")
@@ -126,7 +126,7 @@ offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
-text = "4"
+text = "9"
 label_settings = SubResource("LabelSettings_aq4q6")
 horizontal_alignment = 2
 
@@ -138,7 +138,7 @@ offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
-text = ".456"
+text = ".993"
 label_settings = SubResource("LabelSettings_aq4q6")
 horizontal_alignment = 1
 

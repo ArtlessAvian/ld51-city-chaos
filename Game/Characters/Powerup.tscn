@@ -35,8 +35,3 @@ billboard = 1
 texture = ExtResource("2_4aecf")
 
 [node name="RayCast3d" parent="Visual/Sprite3d" instance=ExtResource("3_ar5se")]
-
-[node name="Label3d" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13678, 0.241758)
-text = "hello
-"

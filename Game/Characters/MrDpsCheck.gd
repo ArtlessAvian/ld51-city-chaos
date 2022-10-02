@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name Enemy
+class_name Dps
 
 const powerup_scene = preload("res://Game/Characters/Powerup.tscn")
 
@@ -7,7 +7,7 @@ const powerup_scene = preload("res://Game/Characters/Powerup.tscn")
 var swap_cooldown = 0
 const swap_period = 0.1
 var facing_left = false
-var health = 20
+var health = 20 # 20 / 10, 2 charged shots a second
 var random_walk = 0
 
 var randommm
@@ -21,22 +21,9 @@ func _ready():
 func _physics_process(delta):
 	swap_cooldown -= delta
 	var player = get_node_or_null("../Player")
-	if player == null and randf() < 0.1:
-		# save processing time
-		pass
-	elif player != null and randommm % 120 < 30:
+	if player != null:
 		chase_player(delta, player, randommm % 120 < 10)
-	else:
-		# about every three seconds
-		if guarding_box == null or guarding_box.is_queued_for_deletion() or randf() < 1/60.0/3.0:
-			guard_new_box()
-		if guarding_box != null:
-			chase_player(delta, guarding_box, true)
-		elif player != null:
-			chase_player(delta, player)
-		else:
-			wander(delta)
-
+	
 	var gravity_acc = 40
 	velocity += Vector3.DOWN * delta * gravity_acc
 	ligma()
@@ -46,23 +33,8 @@ func ligma():
 	move_and_slide()
 	
 
-func guard_new_box():
-	var boxes = get_parent().find_children("", "Box", false, false)
-	if len(boxes) > 0:
-		guarding_box = boxes[randommm % len(boxes)]
 
 func chase_player(delta, player, match_z = false):
-	if match_z:
-		if player.position.z - position.z < -0.5 and can_move_forward():
-			swap_layer(-1)
-		if player.position.z - position.z > 0.5 and can_move_backward():
-			swap_layer(1)
-	else:
-		if randf() < 0.01 and can_move_forward():
-			swap_layer(-1)
-		elif randf() < 0.01 and can_move_backward():
-			swap_layer(1)
-
 	if is_on_floor():
 		if randf() < 0.01:
 			self.velocity.y += 10
@@ -73,33 +45,6 @@ func chase_player(delta, player, match_z = false):
 		set_local_vel_x(move_toward(get_local_vel_x(), 0, delta * 10))
 	else:
 		set_local_vel_x(move_toward(get_local_vel_x(), input_x * 5, delta * 80))
-
-func wander(delta):
-	if randf() < 0.01 and can_move_forward():
-		swap_layer(-1)
-	elif randf() < 0.01 and can_move_backward():
-		swap_layer(1)
-
-	if is_on_floor():
-		if randf() < 0.01:
-			self.velocity.y += 10
-	
-	var input_x = 0
-	random_walk += randf() - 0.5
-	input_x = sign(random_walk) * 0.03
-	facing_left = input_x < 0
-	if input_x == 0 or sign(input_x * get_local_vel_x()) < -0.01:
-		set_local_vel_x(move_toward(get_local_vel_x(), 0, delta * 10))
-	else:
-		set_local_vel_x(move_toward(get_local_vel_x(), input_x * 5, delta))
-
-
-func swap_layer(delta_z: int):
-	self.position.z += delta_z
-	swap_cooldown = swap_period
-	
-	$Visual.position.z -= delta_z
-	
 
 func take_damage():
 	health -= 1
@@ -120,6 +65,7 @@ func _process(delta: float):
 	$Visual.position.y = pow(sin($Visual.position.z * PI), 2) * 0.1 
 
 	$Visual/Sprite3d.flip_h = facing_left
+	%Progress/Bar.scale.x = health / 10.0
 
 func can_move_forward():
 	if self.position.z <= -1.5:
@@ -153,3 +99,8 @@ func set_local_vel_x(signed_mag):
 
 func _on_area_3d_body_entered(body):
 	body.take_damage()
+
+# mr dps check
+func _on_dps_check_forcefield_body_entered(body):
+	if not body.infinite_pierce:
+		body.velocity = -body.velocity.rotated(Vector3.FORWARD, randf() * 2 - 1)

@@ -50,3 +50,18 @@ func pick_random_rotation():
 
 func fpart(x):
 	return x - floor(x)
+	
+func get_local_right():
+	return Vector3.RIGHT.rotated(Vector3.UP, global_rotation.y)
+
+func get_local_vel_x_vec():
+	return velocity.project(get_local_right())
+
+func get_local_vel_x():
+	var proj = get_local_right()
+	# proj y is zero
+	return velocity.x * proj.x + velocity.y * proj.y + velocity.z * proj.z
+
+func set_local_vel_x(signed_mag):
+	velocity += get_local_right() * signed_mag - get_local_vel_x_vec()
+

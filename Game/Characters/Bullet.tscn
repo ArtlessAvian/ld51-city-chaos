@@ -7,10 +7,10 @@
 size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2u14k"]
-size = Vector3(0.4, 0.4, 1)
+size = Vector3(0.4, 0.4, 0.4)
 
 [node name="Bullet" type="CharacterBody3D" groups=["Entity"]]
-collision_layer = 0
+collision_layer = 4096
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -32,3 +32,10 @@ collision_mask = 128
 
 [node name="CollisionShape3d2" type="CollisionShape3D" parent="Area3d"]
 shape = SubResource("BoxShape3D_2u14k")
+
+[node name="Label3d" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+text = "hello"
+font_size = 64
+
+[connection signal="body_entered" from="Area3d" to="." method="_on_area_3d_body_entered"]
