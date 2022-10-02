@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwfo7uy0vedak"]
+
+[ext_resource type="Script" path="res://Game/Characters/Powerup.gd" id="1_njhma"]
+[ext_resource type="Texture2D" uid="uid://c2j25fwvd2dba" path="res://icon.svg" id="2_4aecf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_726gy"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[node name="Powerup" type="CharacterBody3D" groups=["Entity"]]
+collision_layer = 0
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_njhma")
+
+[node name="Area3d" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+collision_layer = 64
+collision_mask = 16
+
+[node name="CollisionShape3d2" type="CollisionShape3D" parent="Area3d"]
+shape = SubResource("BoxShape3D_726gy")
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("BoxShape3D_726gy")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Sprite3d" type="Sprite3D" parent="Visual"]
+offset = Vector2(0, 64)
+modulate = Color(0, 1, 0, 1)
+pixel_size = 0.0078
+billboard = 1
+texture = ExtResource("2_4aecf")
+
+[node name="Label3d" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13678, 0.241758)
+text = "hello
+"

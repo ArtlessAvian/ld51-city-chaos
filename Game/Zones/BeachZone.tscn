@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2ep1qcxuepfb"]
+[gd_scene load_steps=11 format=3 uid="uid://d2ep1qcxuepfb"]
 
 [ext_resource type="Script" path="res://Game/Zones/Zone.gd" id="1_jlh0x"]
 [ext_resource type="PackedScene" uid="uid://k6iv4onhbsun" path="res://Game/Zones/Portal.tscn" id="2_jhmpt"]
@@ -14,6 +14,12 @@ agent_height = 1.0
 agent_radius = 0.4
 agent_max_climb = 1.0
 edge_max_length = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u7d5k"]
+albedo_color = Color(0.866667, 0.745098, 0.596078, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52tyl"]
+albedo_color = Color(0.87451, 0.811765, 0.607843, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_duik6"]
 size = Vector3(32, 4, 16)
@@ -39,10 +45,10 @@ script = ExtResource("1_jlh0x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.5)
 
 [node name="Left" parent="Portals" instance=ExtResource("2_jhmpt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.5, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 1.5, -1.5)
 
 [node name="Right" parent="Portals" instance=ExtResource("2_jhmpt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1.5, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 1.5, -1.5)
 
 [node name="CsgSphere3d" type="CSGSphere3D" parent="." groups=["navmesh"]]
 transform = Transform3D(1.0004, 0, 0, 0, 1.0004, 0, 0, 0, 1.0004, 0, 0, 0)
@@ -58,6 +64,7 @@ operation = 1
 use_collision = true
 polygon = PackedVector2Array(2.5, -8, -2.5, -8, -2.5, -0.5, 1, 0, 2.5, 0)
 depth = 32.0
+material = SubResource("StandardMaterial3D_u7d5k")
 
 [node name="Visual" type="CSGSphere3D" parent="."]
 transform = Transform3D(1.0004, 0, 0, 0, 1.0004, 0, 0, 0, 1.0004, 0, 0, 0)
@@ -72,12 +79,14 @@ operation = 1
 use_collision = true
 polygon = PackedVector2Array(2.5, -8, 17.9856, -7.73156, 17.9196, -0.132439, 7.02533, -0.202295, 2.5, 0)
 depth = 32.0
+material = SubResource("StandardMaterial3D_52tyl")
 
 [node name="CsgPolygon3d2" type="CSGPolygon3D" parent="Visual/CsgPolygon3d3"]
 transform = Transform3D(0.999999, 0, -3.55271e-15, 0, 0.999999, 0, 3.55271e-15, 0, 0.999999, 0, 0, 0)
 use_collision = true
 polygon = PackedVector2Array(-2.5, -8, -2.5, -0.5, -18.9048, -3.08986, -10.613, -8.08121)
 depth = 32.0
+material = SubResource("StandardMaterial3D_u7d5k")
 
 [node name="CsgMesh3d" type="CSGMesh3D" parent="."]
 transform = Transform3D(1.0004, 0, 0, 0, 1.0004, 0, 0, 0, 1.0004, 0, -2, 8)
